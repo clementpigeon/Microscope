@@ -5,5 +5,5 @@ Template.postsList.helpers({
     // being based on a cursor, posts in the template
     // will be reactive
     return Posts.find();
-    }
+  }
 });
