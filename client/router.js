@@ -9,7 +9,13 @@ Router.configure({
 })
 
 Router.map(function(){
-	this.route('postsList', {path: "/"});
+	this.route('postsList', {path: "/"}),
+	this.route('postPage', {
+		path: "/post/:_id",
+		data: function(){
+			return Posts.findOne(this.params._id);
+		}
+	});
 })
 
 Router.onBeforeAction('loading');
