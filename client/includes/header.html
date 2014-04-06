@@ -11,7 +11,9 @@
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li>
+						{{#if currentUser}}
 						<a href="{{pathFor 'postSubmit'}}">Submit a post</a>
+						{{/if }}
 					</li>
 				</ul>
 				<ul class="nav pull-right">
