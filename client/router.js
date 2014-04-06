@@ -19,6 +19,12 @@ Router.map(function(){
 	this.route('postSubmit', {
 		path: "/submit"
 	});
+	this.route('postEdit', {
+		path: "/post/:_id/edit",
+		data: function(){
+			return Posts.findOne(this.params._id);
+		}
+	});
 })
 
 var requireLogin = function(pause){

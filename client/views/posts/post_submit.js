@@ -16,7 +16,7 @@ Template.postSubmit.events({
 			if (error){
 				return alert(error.reason);
 			}
-			console.log('about to redirect '+ id)
+			console.log('about to redirect '+ id);
 			Router.go('postPage', {_id: id});
 		})
 
