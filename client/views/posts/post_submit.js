@@ -14,10 +14,16 @@ Template.postSubmit.events({
 
 		Meteor.call('post', post, function(error, id){
 			if (error){
-				return alert(error.reason);
+				throwError(error.reason);
+				if (error.error === 302){
+					// we use the ID of the previously created article, that we put
+					// in error.details (3rd argument of the Meteor.Error constructor)
+					// in the 'post' method
+					Router.go('postPage', {_id: error.details})
+				}
+			} else {
+				Router.go('postPage', {_id: id});
 			}
-			console.log('about to redirect '+ id);
-			Router.go('postPage', {_id: id});
 		})
 
 	}

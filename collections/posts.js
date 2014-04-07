@@ -7,8 +7,9 @@ Posts.allow({
 
 Posts.deny({
 	update: function(userId, doc, fieldNames){
-		// whitelist the properties that can be edited
-		// (return false if there are other values than these 2)
+		// Whitelists the 2 properties that can be edited.
+		// Returns true, refusing the operation,
+		// if there are other values than these 2
 		return (_.without(fieldNames, 'url', 'title').length > 0);
 	}
 })
