@@ -1,0 +1,21 @@
+Template.commentSubmit.events({
+  'submit form': function(e, template){
+    e.preventDefault();
+    var $body = $(e.target).find('[name=body]');
+    var comment = {
+      body: $body.val(),
+      postId: template.data._id
+    };
+
+    console.log(comment);
+
+    Meteor.call('comment', comment, function(error, id){
+      if (error){
+        Errors.throw(error.reason);
+      } else {
+        $body.val('');
+      }
+    })
+
+  }
+});
