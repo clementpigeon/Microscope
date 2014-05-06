@@ -4,27 +4,31 @@ Router.configure({
 	layoutTemplate: 'layout',
 	loadingTemplate: 'loading',
 	waitOn: function(){
-		return Meteor.subscribe('posts');
+		return [Meteor.subscribe('posts'), Meteor.subscribe('comments')];
 	}
 })
 
 Router.map(function(){
 	this.route('postsList', {path: "/"}),
+
 	this.route('postPage', {
 		path: "/post/:_id",
 		data: function(){
 			return Posts.findOne(this.params._id);
 		}
 	});
+
 	this.route('postSubmit', {
 		path: "/submit"
 	});
+
 	this.route('postEdit', {
 		path: "/post/:_id/edit",
 		data: function(){
 			return Posts.findOne(this.params._id);
 		}
 	});
+
 })
 
 var requireLogin = function(pause){
