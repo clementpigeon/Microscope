@@ -1,4 +1,8 @@
 <template name="postPage">
-	    <h3><a href="{{url}}">{{title}}</a></h3>
-	    <p>posted by {{author}}</p>
+      {{> postItem}}
+      <ul class="comments">
+        {{#each comments}}
+          {{> comment}}
+        {{/each}}
+      </ul>
 </template>

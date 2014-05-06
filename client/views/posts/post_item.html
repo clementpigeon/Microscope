@@ -6,6 +6,7 @@
       </h3>
       <p>
       	submitted by {{author}}
+        <a href="{{pathFor 'postPage'}}">{{commentsCountString}}</a>
       	{{#if ownPost}}
       		<a href="{{pathFor 'postEdit'}}">Edit</a>
       	{{/if}}

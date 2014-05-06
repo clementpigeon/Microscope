@@ -16,7 +16,7 @@ if (Posts.find({}).count() === 0) {
 
 	var telescopeId = Posts.insert({
 	    title: 'Introducing Telescope',
-      userId: sacha._id
+      userId: sacha._id,
 	    author: sacha.profile.name,
 	    url: 'http://sachagreif.com/introducing-telescope/',
       submitted: now - 7 * 3600 * 1000
