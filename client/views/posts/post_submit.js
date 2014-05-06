@@ -11,10 +11,9 @@ Template.postSubmit.events({
 			message: $(e.target).find("[name=message]").val()
 		};
 
-
 		Meteor.call('post', post, function(error, id){
 			if (error){
-				throwError(error.reason);
+				Errors.throw(error.reason);
 				if (error.error === 302){
 					// we use the ID of the previously created article, that we put
 					// in error.details (3rd argument of the Meteor.Error constructor)
