@@ -29,6 +29,9 @@ Meteor.methods({
     };
 
     var commentId = Comments.insert(comment);
+    if (commentId){
+      Posts.update({_id: commentAttributes.postId}, {$inc: {commentsCount: 1}});
+    }
     return commentId;
 
   }

@@ -4,7 +4,7 @@ Router.configure({
 	layoutTemplate: 'layout',
 	loadingTemplate: 'loading',
 	waitOn: function(){
-		return [Meteor.subscribe('posts'), Meteor.subscribe('comments')];
+		return Meteor.subscribe('posts');
 	}
 })
 
@@ -13,6 +13,9 @@ Router.map(function(){
 
 	this.route('postPage', {
 		path: "/post/:_id",
+		waitOn: function(){
+			return Meteor.subscribe('comments', this.params._id);
+		},
 		data: function(){
 			return Posts.findOne(this.params._id);
 		}
