@@ -28,11 +28,11 @@ Meteor.methods({
       submitted: new Date().getTime()
     };
 
-    var commentId = Comments.insert(comment);
-    if (commentId){
-      Posts.update({_id: commentAttributes.postId}, {$inc: {commentsCount: 1}});
-    }
-    return commentId;
+    comment._id = Comments.insert(comment);
+
+    Posts.update({_id: commentAttributes.postId}, {$inc: {commentsCount: 1}});
+    createCommentNotification(comment);
+    return comment._id;
 
   }
 })
