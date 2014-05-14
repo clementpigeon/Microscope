@@ -45,7 +45,6 @@ Meteor.methods({
 					submitted: new Date().getTime()
 				});
 		var postId = Posts.insert(post);
-		console.log('created by Method ' + postId);
 		return postId;
 	}
 })

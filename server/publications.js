@@ -7,7 +7,8 @@ Meteor.publish('comments', function(){
 });
 
 Meteor.publish('notifications', function(){
-  return Notifications.find();
+  // a publish function has the current user's _id available at this.userId
+  return Notifications.find({userId: this.userId});
 });
 
 // Meteor.publish('comments', function(post){
