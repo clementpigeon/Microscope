@@ -39,22 +39,15 @@ if (Posts.find({}).count() === 0) {
     body: 'You sure can Tom!'
   });
 
-	Posts.insert({
-    title: 'Meteor',
-    userId: tom._id,
-    author: tom.profile.name,
-    url: 'http://meteor.com',
-    url: 'http://meteor.com',
-    submitted: now - 10 * 3600 * 1000,
-    commentsCount: 0
-	});
-	Posts.insert({
-    title: 'The Meteor Book',
-    userId: tom._id,
-    author: tom.profile.name,
-    url: 'http://themeteorbook.com',
-    submitted: now - 12 * 3600 * 1000,
-    commentsCount: 0
-  });
+  for (var i = 0; i < 15; i++){
+    Posts.insert({
+       title: 'Post ' + (15 - i),
+       userId: tom._id,
+       author: tom.profile.name,
+       url: 'http://google.com/?q=test-' + i,
+       submitted: now - i * 3600 * 1000,
+       commentsCount: 0
+     });
+  }
 
 }
