@@ -1,8 +1,33 @@
 Router.configure({
 	layoutTemplate: 'layout',
 	loadingTemplate: 'loading',
-	waitOn: function(){
+	waitOn: function () {
 		return Meteor.subscribe('notifications');
+	}
+});
+
+PostsListController = RouteController.extend({
+	template: 'postsList',
+	increment: 5,
+	limit: function(){
+		return parseInt(this.params.postsLimit || this.increment);
+	},
+	findOptions: function(){
+		return { sort: {submitted: -1}, limit: this.limit() };
+	},
+	waitOn: function () {
+		return Meteor.subscribe('posts', this.findOptions());
+	},
+	posts: function(){
+		return Posts.find({}, this.findOptions())
+	},
+	data: function(){
+		var hasMore = this.posts().count() === this.limit();
+		var nextPath = this.route.path({postsLimit: this.limit() + this.increment});
+		return {
+			nextPath: hasMore ? nextPath : null,
+			posts: this.posts()
+		};
 	}
 })
 
@@ -10,7 +35,7 @@ Router.map(function(){
 
 	this.route('postPage', {
 		path: "/post/:_id",
-		waitOn: function(){
+		waitOn: function () {
 			return Meteor.subscribe('comments', this.params._id);
 		},
 		data: function(){
@@ -31,16 +56,7 @@ Router.map(function(){
 
 	this.route('postsList', {
 		path: "/:postsLimit?",
-		waitOn: function(){
-			var limit = parseInt(this.params.postsLimit) || 5;
-			return Meteor.subscribe('posts', limit);
-		},
-		data: function(){
-			var limit = parseInt(this.params.postsLimit) || 5;
-			return {
-				posts: Posts.find({}, {sort: {submitted: -1}, limit: limit})
-			};
-		}
+		controller: PostsListController
 	})
 })
 
